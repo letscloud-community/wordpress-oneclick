@@ -11,12 +11,6 @@ echo "(ex. example.org or test.example.org) do not include www or http/s"
 
 # Entering details of the new Wordpress site
 read -p "Domain: " url
-domain=^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$
-while ! [[ "${url}" =~ ${domain} ]]; do
-        echo "Invalid Domain:"
-        read -p "Enter Valid Domain:" domain
-done
-
 read -p "Title: " title
 read -p "Admin email: " admin_email
 
@@ -30,12 +24,6 @@ read -p "Admin username: " admin_name
 read -sp "Admin password: " admin_pass
 
 #Creating the database
-mysql <<EOF
-CREATE DATABASE IF NOT EXISTS $dbname;
-CREATE USER '$dbuser'@'localhost' IDENTIFIED BY '$dbpass';
-GRANT ALL ON $dbname.* TO '$dbuser'@'localhost';
-ALTER DATABASE $dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
-EOF
 mysql <<EOF
 CREATE DATABASE IF NOT EXISTS $dbname;
 CREATE USER '$dbuser'@'localhost' IDENTIFIED BY '$dbpass';
@@ -74,7 +62,7 @@ echo "Installation is complete."
 echo ""
 myip=$(hostname -I | awk '{print$1}')
 
-echo "Welcome to LetsCloud."
+echo "Welcome to LetsCloud OneClick."
 echo ""
 echo "In a web browser, you can view: "
 echo " * The new WordPress site: http://$myip
