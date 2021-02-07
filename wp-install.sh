@@ -54,7 +54,7 @@ wp plugin install wp-fail2ban --allow-root --path="/var/www/html"
 wp plugin activate wp-fail2ban --allow-root --path="/var/www/html"
 wp plugin install disable-xml-rpc --activate --allow-root --path="/var/www/html"
 wp plugin install wp-super-cache --allow-root --path="/var/www/html"
-wp wp-super-cache enable --allow-root --path="/var/www/html"
+wp plugin activate wp-super-cache --allow-root --path="/var/www/html"
 
 
 echo "========================="
