@@ -32,7 +32,7 @@ ALTER DATABASE $dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
 EOF
 
 #NGINX Configuration
-sed -i 's/server_name _/server_name $domain/g' /etc/nginx/sites-enabled/default
+sed -i 's/server_name _/server_name '$url'/g' /etc/nginx/sites-enabled/default
 
 
 # Starting the Wordpress installation process
@@ -66,11 +66,13 @@ echo "Welcome to LetsCloud OneClick."
 echo ""
 echo "In a web browser, you can view: "
 echo " * The new WordPress site: http://$myip
-Adninistrator URL:
+
+Administrator URL:
 http://$url/wp-admin or
 http://$myip/wp-admin
 User: $admin_name
 Pass: $admin_pass
+
 On the server:
  * The default web root is located at /var/www/html
  * The must-use WordPress security plugin, fail2ban, is located at
@@ -79,9 +81,11 @@ On the server:
    https://letscloud.io for more detail.
  * For security, xmlrpc calls are blocked by default.  This block can be
     disabled by running "wp plugin deactivate disable-xml-rpce --allow-root --path="/var/www/html"" in the terminal.
+
 *** IMPORTANT
 If you are not using a valid domain, edit wp-config.php and enter the data below:
 define( 'WP_HOME', 'http://$myip' );
 define( 'WP_SITEURL', 'http://$myip' );
+
 For help and more information, visit https://letscloud.io
 ********************************************************************************"
