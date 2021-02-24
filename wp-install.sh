@@ -1,5 +1,5 @@
 #!/bin/bash -e
-
+clear
 dbpass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)
 dbuser=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 8 | head -n 1)
 dbname=$(cat /dev/urandom | tr -dc 'a-zA-Z' | fold -w 8 | head -n 1)
