@@ -31,10 +31,6 @@ GRANT ALL ON $dbname.* TO '$dbuser'@'localhost';
 ALTER DATABASE $dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
 EOF
 
-#NGINX Configuration
-sed -i 's/server_name _/server_name '$url'/g' /etc/nginx/sites-enabled/default
-
-
 # Starting the Wordpress installation process
 cd /var/www/html
 curl -s -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -44,7 +40,7 @@ cp wp-cli.phar /usr/bin/wp
 # Download the latest wordpress package using wp-cli
 wp core download --allow-root
 
-# Creating wp-config file using credentials defined on lines 8-11
+# Creating wp-config file using credentials
 wp core config --dbhost=localhost --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --allow-root
 
 chmod 644 wp-config.php
@@ -56,7 +52,10 @@ wp plugin install disable-xml-rpc --activate --allow-root --path="/var/www/html"
 wp plugin install wp-super-cache --allow-root --path="/var/www/html"
 wp plugin activate wp-super-cache --allow-root --path="/var/www/html"
 
+#Fix permission
+chown www-data.www-data /var/www/html -R
 
+#Display configuration
 echo "========================="
 echo "Installation is complete."
 echo ""
