@@ -13,11 +13,9 @@ echo "(ex. example.org or test.example.org) do not include www or http/s"
 read -p "Domain: " url
 read -p "Title: " title
 read -p "Admin email: " admin_email
-
-email=^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$
-while ! [[ "${admin_email}" =~ ${email} ]]; do
-        echo "Invalid email:"
-        read -p "Enter Valid Email:" admin_email
+while ! [[ "${admin_email}" =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$ ]]; do
+        echo "Please enter valid email"
+        read -p "Admin email:" admin_email
 done
 
 read -p "Admin username: " admin_name
