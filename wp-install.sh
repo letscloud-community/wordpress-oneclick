@@ -21,7 +21,16 @@ while ! [[ "${admin_email}" =~ ${email} ]]; do
 done
 
 read -p "Admin username: " admin_name
+while [ -z "$admin_name" ]; do
+        echo "Please enter the admin username"
+        read -p "Admin username: " admin_name
+done
+
 read -sp "Admin password: " admin_pass
+while [ -z "$admin_pass" ]; do
+        echo "Please enter the admin password"
+        read -sp "Admin password: " admin_pass
+done
 
 #Creating the database
 mysql <<EOF
